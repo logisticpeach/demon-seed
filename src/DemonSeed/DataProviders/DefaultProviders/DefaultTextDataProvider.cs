@@ -5,6 +5,9 @@ using System.Reflection;
 using System.IO;
 using Newtonsoft.Json;
 using System.Linq;
+using System.Runtime.CompilerServices;
+
+[assembly:InternalsVisibleTo("DemonSeed.Tests")]
 
 namespace DemonSeed.DataProviders.DefaultProviders
 {
@@ -36,10 +39,14 @@ namespace DemonSeed.DataProviders.DefaultProviders
 
         public string GetParagraphs(int paragraphCount)
         {
+            if (paragraphCount < 0)
+                throw new ArgumentOutOfRangeException("paragraphCount", "The paragraph count must be non-negative");
+
+
             int numParas = _sampleTextDocument.Paragraphs.Count;
 
             if (paragraphCount > numParas)
-                throw new ArgumentOutOfRangeException($"Cannot generate {paragraphCount} paragraphs - maximum supported by provider is {numParas}");
+                throw new ArgumentOutOfRangeException("paragraphCount", $"Cannot generate {paragraphCount} paragraphs - maximum supported by provider is {numParas}");
 
             int startingMargin = numParas - paragraphCount;
             int startIndex = 0;
@@ -69,12 +76,18 @@ namespace DemonSeed.DataProviders.DefaultProviders
 
         public string GetWords(int wordCount)
         {
+            if (wordCount < 0)
+                throw new ArgumentOutOfRangeException("wordCount", "Word count must be non-negative");
+
+            if (wordCount == 0)
+                return string.Empty;
+
             var qualifyingParagraphsForSample = _sampleTextDocument.Paragraphs.Where(x => x.Words.Count >= wordCount).ToList();
 
             if (qualifyingParagraphsForSample.Count == 0)
             {
                 int maxWords = _sampleTextDocument.Paragraphs.OrderByDescending(x => x.Words.Count).First().Words.Count;
-                throw new ArgumentOutOfRangeException($"Cannot generate a string of this length, the maximum supported by this provider is {maxWords} words");
+                throw new ArgumentOutOfRangeException("wordCount", $"Cannot generate a string of this length, the maximum supported by this provider is {maxWords} words");
             }
 
             int index = 0;
