@@ -36,7 +36,7 @@ namespace DemonSeed.Tests.Provders
         {
             string result = _textProvider.GetWords(0);
 
-            Assert.Equal<string>(result, string.Empty);
+            Assert.Equal<string>(string.Empty, result);
         }
 
         [Fact]
@@ -73,7 +73,7 @@ namespace DemonSeed.Tests.Provders
 
             Assert.NotNull(result);
 
-            Assert.Equal<string>(result, string.Empty);
+            Assert.Equal<string>(string.Empty, result);
         }
 
         [Fact]

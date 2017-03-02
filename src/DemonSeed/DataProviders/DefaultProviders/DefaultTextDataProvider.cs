@@ -31,9 +31,9 @@ namespace DemonSeed.DataProviders.DefaultProviders
                     }
                 }
             }
-            catch
+            catch(Exception e)
             {
-                _sampleTextDocument = null;
+                throw new InvalidOperationException("An unexpected error ocurred while initialising the default text provider", e);
             }
         }
 
@@ -41,7 +41,6 @@ namespace DemonSeed.DataProviders.DefaultProviders
         {
             if (paragraphCount < 0)
                 throw new ArgumentOutOfRangeException("paragraphCount", "The paragraph count must be non-negative");
-
 
             int numParas = _sampleTextDocument.Paragraphs.Count;
 
