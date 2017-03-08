@@ -10,6 +10,41 @@ namespace DemonSeed.Metadata
 
         public TextType DesiredType { get; set; }
 
+        public override SeedType SeedDataType
+        {
+            get
+            {
+                switch(DesiredType)
+                {
+                    case TextType.Paragraphs:
+                        return SeedType.TextWithParagraphCount;
+                    default:
+                        return SeedType.TextWithWordCount;
+                }
+            }
+        }
+
+        internal override SeedRequestParamatersBase GetParameters()
+        {
+            switch (DesiredType)
+            {
+                case TextType.Paragraphs:
+                    {
+                        return new DataProviders.Parameters.ParagraphSeedRequestParameters()
+                        {
+                            ParagraphCount = DesiredLength
+                        };
+                    }
+                default:
+                    {
+                        return new DataProviders.Parameters.WordCountSeedRequestParameters()
+                        {
+                            WordCount = DesiredLength
+                        };
+                    }
+            }
+        }
+
         public SeedTextAttribute()
         {
             DesiredType = TextType.String;

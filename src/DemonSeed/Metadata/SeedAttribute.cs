@@ -4,5 +4,10 @@ using System.Text;
 
 namespace DemonSeed.Metadata
 {
-    public abstract class SeedAttribute : Attribute { }
+    public abstract class SeedAttribute : Attribute
+    {
+        public abstract SeedType SeedDataType { get; }
+
+        internal abstract SeedRequestParamatersBase GetParameters();
+    }
 }

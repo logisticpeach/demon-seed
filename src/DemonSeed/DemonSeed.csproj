@@ -5,6 +5,12 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Metadata\SeedDateAttribute.cs" />
+    <Compile Remove="Metadata\SeedDoubleAttribute.cs" />
+    <Compile Remove="Metadata\SeedIntegerAttribute.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
     <None Remove="Resources\names.json" />
     <None Remove="Resources\text.json" />
   </ItemGroup>
