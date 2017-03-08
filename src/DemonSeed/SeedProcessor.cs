@@ -98,9 +98,12 @@ namespace DemonSeed
                 _encounteredTypes.Pop();
                 return instance;
             }
-            catch (Exception)
+            catch (Exception e)
             {
-                return null;
+                if (e is OverflowException)
+                    throw e;
+                else
+                    return null;
             }
         }
 
