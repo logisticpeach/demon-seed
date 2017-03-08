@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace DemonSeed.Interceptors
+namespace DemonSeed.Interceptors.Name
 {
     class FirstNameInterceptor : IPropertyValueInterceptor
     {

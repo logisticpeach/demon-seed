@@ -34,7 +34,9 @@ namespace DemonSeed
 
         private void RegisterDefaultInterceptors(ISeedOptions options)
         {
-            AddInterceptor(SeedType.FirstName, new Interceptors.FirstNameInterceptor(options.NameProvder));
+            AddInterceptor(SeedType.FirstName, new Interceptors.Name.FirstNameInterceptor(options.NameProvder));
+            AddInterceptor(SeedType.LastName, new Interceptors.Name.LastNameInterceptor(options.NameProvder));
+            AddInterceptor(SeedType.FullName, new Interceptors.Name.FullNameDataProvider(options.NameProvder));
         }
     }
 }
